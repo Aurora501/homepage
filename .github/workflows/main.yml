@@ -1,0 +1,26 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 根据你的实际分支修改
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu - latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          # 如果是简单HTML/CSS/JavaScript，这里可能无需额外构建步骤
+          # 若有其他构建需求，如使用npm构建前端项目，在此添加相应命令
+          npm install
+          npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions - github - pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir:./build  # 根据实际构建输出目录修改
